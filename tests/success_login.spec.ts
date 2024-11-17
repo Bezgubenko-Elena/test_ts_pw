@@ -11,7 +11,7 @@ test('success_login', async () => {
   await loginPage.goto();
   await loginPage.fillLogin('tester@inzhenerka.tech');
   await loginPage.fillPassword('LetsTest!');
-  await loginPage.submit();
-  const userNameLocator = page.locator('h2:has-text("Tester")');
-  await expect(userNameLocator).toHaveText('Tester');
+  await loginPage.clickSubmit();
+
+  await loginPage.checkUserName('Tester');
 });
