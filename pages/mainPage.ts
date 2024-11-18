@@ -16,6 +16,7 @@ export class MainPage extends BasePage {
     private buttonAddWaterHoles: Locator;
     private buttonChoiceMaterial: Locator;
     private buttonGetResult: Locator;
+//    private requestData: string | null;
 
     constructor(page: Page) {
         super(page);
@@ -31,6 +32,7 @@ export class MainPage extends BasePage {
         this.buttonAddWaterHoles = page.locator('[data-testid="options-item"]').filter({ hasText: 'Проточки для стока воды' });
         this.buttonChoiceMaterial = page.locator('[data-testid="stone-block"]').filter({ hasText: 'N-103 Gray Onix' });
         this.buttonGetResult = page.locator('button[data-testid="calc-button"]');
+//        this.requestData = null;
     }
 
     async switchTableTopStraight() {
@@ -72,6 +74,8 @@ export class MainPage extends BasePage {
     async clickButtonGetResult() {
         this.buttonGetResult.click();
     }
+
+
 
     async checkFieldTypeTopTable(TypeTopTable: string) {
         await expect(this.fieldTypeTableTop).toHaveText(TypeTopTable);

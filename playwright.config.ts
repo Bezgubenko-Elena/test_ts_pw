@@ -1,0 +1,42 @@
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+//  reporter: [['list'], ['html', { open: 'always' }]],
+  reporter: [["allure-playwright"]],
+  testDir: './tests',  // Директория, в которой находятся тесты
+//  retries: 1,          // Количество повторов в случае падения теста
+  workers: 2,          // Количество воркеров, которые будут использоваться для параллельных запусков
+  use: {
+    headless: false, // Запуск браузера в headless режиме
+    viewport: { width: 1280, height: 720 }, // Размер окна браузера
+    ignoreHTTPSErrors: true, // Игнорирование ошибок сертификата HTTPS
+    video: 'retain-on-failure', // Запись видео только если тест упал
+    trace: 'on-first-retry', // Трассировка, если тест упал на первой попытке
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] }
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] }
+    },
+    {
+        name: 'Mobile Chrome',
+        use: {
+          ...devices['Pixel 5'], // Используем предустановленные настройки для Google Pixel 5
+        },
+      },
+      {
+        name: 'Mobile Safari',
+        use: {
+          ...devices['iPhone 12'], // Используем предустановленные настройки для iPhone 12
+        },
+      },
+  ],
+});

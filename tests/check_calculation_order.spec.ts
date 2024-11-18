@@ -2,13 +2,9 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../pages/mainPage.js';
 import { HandlersPage } from '../pages/handlersPage.js';
 import { ResultPage } from '../pages/resultPage.js';
-const { chromium } = require('playwright');
 
 
-test('check_calculation_order', async () => {
-  const browser = await chromium.launch({ headless: false });  // Запуск браузера с интерфейсом.
-  const context = await browser.newContext();
-  const page = await context.newPage();
+test('check_calculation_order', async ( {page, context} ) => {
   
   const mainPage = new MainPage(page);
   const handlersPage = new HandlersPage(page);
