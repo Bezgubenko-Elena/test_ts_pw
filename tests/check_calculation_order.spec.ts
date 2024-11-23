@@ -10,9 +10,6 @@ test('check_calculation_order', async ( {page, context} ) => {
   const handlersPage = new HandlersPage(page);
 
   await mainPage.goto();
-//  await page.fill('input[name=login]', 'tester@inzhenerka.tech');
-//  await page.fill('input[name=pass]', 'LetsTest!');
-//  await page.click('button[type=button]');
   
   await mainPage.switchTableTopUShaped();
   await mainPage.openSelectorDebthTableTop(); //не удачно сделано, если будет выбрано перед началом теста, то упадет с неверным значением
@@ -28,7 +25,7 @@ test('check_calculation_order', async ( {page, context} ) => {
     context.waitForEvent('page'), // Ожидаем, пока откроется новая вкладка
     handlersPage.clickButtonForOpenReport()
   ]);
-  // Теперь у вас есть доступ к новой вкладке
+  // Доступ к новой вкладке
 await newPage.waitForLoadState(); // Убедимся, что новая страница загрузилась
 
   const resultPage = new ResultPage(newPage);

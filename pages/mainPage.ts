@@ -16,6 +16,7 @@ export class MainPage extends BasePage {
     private buttonAddWaterHoles: Locator;
     private buttonChoiceMaterial: Locator;
     private buttonGetResult: Locator;
+    private buttonOutput: Locator;
 //    private requestData: string | null;
 
     constructor(page: Page) {
@@ -32,6 +33,7 @@ export class MainPage extends BasePage {
         this.buttonAddWaterHoles = page.locator('[data-testid="options-item"]').filter({ hasText: 'Проточки для стока воды' });
         this.buttonChoiceMaterial = page.locator('[data-testid="stone-block"]').filter({ hasText: 'N-103 Gray Onix' });
         this.buttonGetResult = page.locator('button[data-testid="calc-button"]');
+        this.buttonOutput = page.locator('button').filter({hasText: 'Выйти'});
 //        this.requestData = null;
     }
 
@@ -75,6 +77,9 @@ export class MainPage extends BasePage {
         this.buttonGetResult.click();
     }
 
+    async ClickButtomOutput() {
+        this.buttonOutput.click();
+    }
 
 
     async checkFieldTypeTopTable(TypeTopTable: string) {

@@ -15,7 +15,6 @@ export class ResultPage extends BasePage {
         this.typeTableTop = page.locator('h4:has-text("Параметры столешницы 1") + table.table tbody tr:nth-child(2) td:nth-child(3)');
         this.isAddWaterHoles = page.locator('h4:has-text("Параметры столешницы 1") + table.table tbody tr:nth-child(6) td:nth-child(3)');
         this.totalOrderCost = page.locator('h3:has-text("Итоговая стоимость заказа") + table.table tbody tr:nth-child(6) td:nth-child(5)');
-        
     }
 
     async checkTypeMaterial(expectedText: string) {
