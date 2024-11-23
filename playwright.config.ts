@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 export default defineConfig({
 //  reporter: [['list'], ['html', { open: 'always' }]],
@@ -14,29 +15,38 @@ export default defineConfig({
     trace: 'on-first-retry', // Трассировка, если тест упал на первой попытке
   },
   projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      use: { ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json'},
+        dependencies: ['setup'],
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
+      use: { ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/user.json'},
+        dependencies: ['setup'],
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] }
+      use: { ...devices['Desktop Safari'],
+        storageState: 'playwright/.auth/user.json'},
+        dependencies: ['setup'],
     },
     {
         name: 'Mobile Chrome',
         use: {
-          ...devices['Pixel 5'], // Используем предустановленные настройки для Google Pixel 5
-        },
+          ...devices['Pixel 5'],
+          storageState: 'playwright/.auth/user.json'},
+          dependencies: ['setup'],
       },
       {
         name: 'Mobile Safari',
         use: {
-          ...devices['iPhone 12'], // Используем предустановленные настройки для iPhone 12
-        },
+          ...devices['iPhone 12'],
+          storageState: 'playwright/.auth/user.json'},
+          dependencies: ['setup'],
       },
   ],
 });

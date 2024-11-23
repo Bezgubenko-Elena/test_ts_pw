@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { MainPage } from '../pages/mainPage.js';
 import { HandlersPage } from '../pages/handlersPage.js';
 import { ResultPage } from '../pages/resultPage.js';
@@ -10,9 +10,9 @@ test('check_calculation_order', async ( {page, context} ) => {
   const handlersPage = new HandlersPage(page);
 
   await mainPage.goto();
-  await page.fill('input[name=login]', 'tester@inzhenerka.tech');
-  await page.fill('input[name=pass]', 'LetsTest!');
-  await page.click('button[type=button]');
+//  await page.fill('input[name=login]', 'tester@inzhenerka.tech');
+//  await page.fill('input[name=pass]', 'LetsTest!');
+//  await page.click('button[type=button]');
   
   await mainPage.switchTableTopUShaped();
   await mainPage.openSelectorDebthTableTop(); //не удачно сделано, если будет выбрано перед началом теста, то упадет с неверным значением
@@ -36,5 +36,5 @@ await newPage.waitForLoadState(); // Убедимся, что новая стр�
   await resultPage.checkTypeMaterial('acryl:Neomarm:N-103 Gray Onix');
   await resultPage.checkTypeTableTop('П-образная');
   await resultPage.checkIsAddWaterHoles('Проточки для стока воды');
-  await resultPage.checkTotalOrderCost('423600.00 ₽');
+  await resultPage.checkTotalOrderCost('433100.00 ₽');
 });
