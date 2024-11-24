@@ -15,7 +15,6 @@ export class ResultPage extends BasePage {
         this.typeTableTop = page.locator('h4:has-text("Параметры столешницы 1") + table.table tbody tr:nth-child(2) td:nth-child(3)');
         this.isAddWaterHoles = page.locator('h4:has-text("Параметры столешницы 1") + table.table tbody tr:nth-child(6) td:nth-child(3)');
         this.totalOrderCost = page.locator('h3:has-text("Итоговая стоимость заказа") + table.table tbody tr:nth-child(6) td:nth-child(5)');
-        
     }
 
     async checkTypeMaterial(expectedText: string) {
@@ -30,7 +29,13 @@ export class ResultPage extends BasePage {
         await expect(this.isAddWaterHoles).toHaveText(expectedText);
     }
 
-    async checkTotalOrderCost(expectedText: string) {
-        await expect(this.totalOrderCost).toHaveText(expectedText);
-    }
+    async checkTotalOrderCost(expectedTextLocator: Locator) {
+        const expectedText = await expectedTextLocator.textContent();
+        if (expectedText !== null) {
+            const formattedExpectedText = expectedText.replace(/\s+/g, '').replace('₽', '').concat('.00 ₽');
+            await expect(this.totalOrderCost).toHaveText(formattedExpectedText);
+          } else {
+            throw new Error(`Элемент не содержит текст: ожидалось '${expectedText}'`);
+          }
+        }
 }

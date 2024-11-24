@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["tests/**/*.ts"]
+  "include": ["tests/**/*.ts", "tests/auth.setup.ts"]
 }

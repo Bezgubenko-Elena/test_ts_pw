@@ -7,13 +7,17 @@ yarn-error.log*
 dist/
 build/
 test-results/
-
+allure-results/
+my-report/
+playwright-report/
 .playwright/
+.auth/
 
 *.tsbuildinfo
 
 .vscode/
 *.sublime*
+
 
 # файлы Windows
 Thumbs.db
