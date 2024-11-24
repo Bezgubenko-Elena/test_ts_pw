@@ -17,7 +17,9 @@ export class MainPage extends BasePage {
     private buttonChoiceMaterial: Locator;
     private buttonGetResult: Locator;
     private buttonOutput: Locator;
-//    private requestData: string | null;
+    public checkFieldTypeMaterial: string;
+    public checkFieldTypeTableTop: string;
+    public checkFieldIsAddWaterHoles: string;
 
     constructor(page: Page) {
         super(page);
@@ -34,7 +36,9 @@ export class MainPage extends BasePage {
         this.buttonChoiceMaterial = page.locator('[data-testid="stone-block"]').filter({ hasText: 'N-103 Gray Onix' });
         this.buttonGetResult = page.locator('button[data-testid="calc-button"]');
         this.buttonOutput = page.locator('button').filter({hasText: 'Выйти'});
-//        this.requestData = null;
+        this.checkFieldTypeMaterial = '';
+        this.checkFieldTypeTableTop = '';
+        this.checkFieldIsAddWaterHoles = '';
     }
 
     async switchTableTopStraight() {
@@ -74,7 +78,30 @@ export class MainPage extends BasePage {
     }
 
     async clickButtonGetResult() {
-        this.buttonGetResult.click();
+        const requestPromise = this.page.waitForRequest(
+            request => request.url().endsWith("/calculate_prices") && request.method() === "POST"
+        );
+        await this.buttonGetResult.click();
+        const request = await requestPromise;
+        const jsonData = request.postDataJSON();
+
+        this.checkFieldTypeMaterial = jsonData.parameters.material.uid;
+        
+        type CaseType = 'Q' | 'L' | 'U';
+        function checkTypeTableTop (type: CaseType): string {
+            switch (type) {
+                case 'Q':
+                    return 'Прямая';
+                case 'L':
+                    return 'Г-образная';
+                case 'U':
+                    return 'П-образная';
+            }
+        }
+        this.checkFieldTypeTableTop = checkTypeTableTop(jsonData.parameters.countertops[0].type);
+
+        const checkIsAddWaterHoles = (drainGroves: boolean) => drainGroves ? 'Проточки для стока воды' : '';
+        this.checkFieldIsAddWaterHoles = checkIsAddWaterHoles(jsonData.parameters.options.drainGroves);
     }
 
     async ClickButtomOutput() {

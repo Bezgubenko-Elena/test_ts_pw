@@ -18,7 +18,7 @@ test('check_calculation_order', async ( {page, context} ) => {
   await mainPage.clickButtonAddKitchenIsland();
   await mainPage.clickButtonAddWaterHoles();
   await mainPage.clickButtonChoiceMaterial();
-
+  
   await mainPage.clickButtonGetResult();
 
   const [newPage] = await Promise.all([
@@ -30,8 +30,8 @@ await newPage.waitForLoadState(); // Убедимся, что новая стр�
 
   const resultPage = new ResultPage(newPage);
 
-  await resultPage.checkTypeMaterial('acryl:Neomarm:N-103 Gray Onix');
-  await resultPage.checkTypeTableTop('П-образная');
-  await resultPage.checkIsAddWaterHoles('Проточки для стока воды');
-  await resultPage.checkTotalOrderCost('433100.00 ₽');
+  await resultPage.checkTypeMaterial(mainPage.checkFieldTypeMaterial);
+  await resultPage.checkTypeTableTop(mainPage.checkFieldTypeTableTop);
+  await resultPage.checkIsAddWaterHoles(mainPage.checkFieldIsAddWaterHoles);
+  await resultPage.checkTotalOrderCost(handlersPage.fieldFinalPrice);
 });

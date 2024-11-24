@@ -29,7 +29,13 @@ export class ResultPage extends BasePage {
         await expect(this.isAddWaterHoles).toHaveText(expectedText);
     }
 
-    async checkTotalOrderCost(expectedText: string) {
-        await expect(this.totalOrderCost).toHaveText(expectedText);
-    }
+    async checkTotalOrderCost(expectedTextLocator: Locator) {
+        const expectedText = await expectedTextLocator.textContent();
+        if (expectedText !== null) {
+            const formattedExpectedText = expectedText.replace(/\s+/g, '').replace('₽', '').concat('.00 ₽');
+            await expect(this.totalOrderCost).toHaveText(formattedExpectedText);
+          } else {
+            throw new Error(`Элемент не содержит текст: ожидалось '${expectedText}'`);
+          }
+        }
 }
