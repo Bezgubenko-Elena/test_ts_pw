@@ -12,10 +12,10 @@ jobs:
         uses: actions/checkout@v4
       - run: npm ci
       - run: npx playwright install --with-deps
-      - name: Load .env file
-        uses: fnkr/github-actions-set-env@v2
-        with:
-          envFilePath: .env
+      - name: Load environment variables from file
+        run: |
+          echo "LOGIN=$(grep LOGIN .env | cut -d '=' -f2)" >> $GITHUB_ENV
+          echo "PASSWORD=$(grep PASSWORD .env | cut -d '=' -f2)" >> $GITHUB_ENV
       - name: Print environment variables
         run: |
           echo $LOGIN
