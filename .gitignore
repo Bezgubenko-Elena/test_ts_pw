@@ -18,6 +18,7 @@ playwright-report/
 .vscode/
 *.sublime*
 
+.env
 
 # файлы Windows
 Thumbs.db

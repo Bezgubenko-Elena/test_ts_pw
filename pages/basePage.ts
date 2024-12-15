@@ -1,5 +1,6 @@
 import { Page, Locator } from 'playwright';
 import { expect } from '@playwright/test';
+import dotenv from 'dotenv';
 
 
 export abstract class BasePage {
@@ -25,5 +26,18 @@ export abstract class BasePage {
     async isTitleVisiable(expectedText: string) {
         await expect(this.title).toBeVisible();
         await expect(this.title).toHaveText(expectedText);
+    }
+
+    getLoginPasswordFromEnv(): {login: string, password: string} {
+        dotenv.config();
+        const login = process.env.LOGIN;
+        const password = process.env.PASSWORD;
+        
+        if (login === undefined || password === undefined) {
+          throw new Error("Переменные окружения LOGIN и PASSWORD должны быть установлены");
+        }
+
+        return {login: login, password: password}
+        
     }
 }

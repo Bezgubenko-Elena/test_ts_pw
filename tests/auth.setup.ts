@@ -2,17 +2,19 @@ import { test as setup, expect } from '@playwright/test';
 import path from 'path';
 import { LoginPage } from '../pages/loginPage.js';
 
+
 const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
-
   const loginPage = new LoginPage(page);
+  const credentials = await loginPage.getLoginPasswordFromEnv();
+
   await loginPage.goto();
-  await loginPage.fillLogin('tester@inzhenerka.tech');
-  await loginPage.fillPassword('LetsTest!');
+  await loginPage.fillLogin(credentials.login);
+  await loginPage.fillPassword(credentials.password);
   await loginPage.clickSubmit();
 
-  await page.waitForURL('https://dev.topklik.online/');
+  await page.waitForURL(loginPage.baseUrl);
 
   await expect(page.getByRole('button', { name: 'Выйти' })).toBeVisible();
 

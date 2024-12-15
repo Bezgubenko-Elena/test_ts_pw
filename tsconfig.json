@@ -7,7 +7,8 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true
   },
-  "include": ["tests/**/*.ts", "tests/auth.setup.ts"]
+  "include": ["tests/**/*.ts", "pages/**/*.ts", "tests/auth.setup.ts"]
 }

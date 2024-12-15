@@ -24,28 +24,17 @@ export class MainPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.buttonSwitchStraightTableTop = page.getByTestId('countertop-type-q');
-        //this.buttonSwitchStraightTableTop = page.locator('button[data-testid=countertop-type-q]');
         this.buttonSwitchUShapedTableTop = page.getByTestId('countertop-type-u');
-        //this.buttonSwitchUShapedTableTop = page.locator('button[data-testid=countertop-type-u]');
         this.fieldTypeTableTop = page.getByTestId('order-list').locator('h4:nth-of-type(1)');
-        //this.fieldTypeTableTop = page.locator('div[data-testid=order-list] h4:nth-of-type(1)');
         this.toggleHideTableTop = page.getByTestId('hide-countertop');
-        //this.toggleHideTableTop = page.locator('div[data-testid=hide-countertop]');
         this.buttonShowTableTop = page.getByTestId('show-main');
-        //this.buttonShowTableTop = page.locator('div[data-testid=show-main]');
         this.selectorDebthTableTop = page.getByTestId('select-thickness').locator('label:has-text("Толщина") + button');
-        //this.selectorDebthTableTop = page.locator('div[data-testid=select-thickness] label:has-text("Толщина") + button');
         this.dropdownListFieldDebthTableTop = page.getByTestId('select-thickness').locator('div button');
-        //this.dropdownListFieldDebthTableTop = page.locator('div[data-testid=select-thickness] div button');
-        this.buttonWallPanel = page.locator('button[data-testid=top-button]:nth-child(3)'); //locator().nth(0)
+        this.buttonWallPanel = page.locator('button[data-testid=top-button]:nth-child(3)');
         this.buttonAddKitchenIsland = page.getByTestId('product-item').filter({ hasText: 'Остров' });
-        //this.buttonAddKitchenIsland = page.locator('[data-testid="product-item"]').filter({ hasText: 'Остров' });
         this.buttonAddWaterHoles = page.getByTestId('options-item').filter({ hasText: 'Проточки для стока воды' });
-        //this.buttonAddWaterHoles = page.locator('[data-testid="options-item"]').filter({ hasText: 'Проточки для стока воды' });
         this.buttonChoiceMaterial = page.getByTestId('stone-block').filter({ hasText: 'N-103 Gray Onix' });
-        //this.buttonChoiceMaterial = page.locator('[data-testid="stone-block"]').filter({ hasText: 'N-103 Gray Onix' });
         this.buttonGetResult = page.getByTestId('calc-button');
-        //this.buttonGetResult = page.locator('button[data-testid="calc-button"]');
         this.buttonOutput = page.locator('button').filter({hasText: 'Выйти'});
         this.checkFieldTypeMaterial = '';
         this.checkFieldTypeTableTop = '';
@@ -128,5 +117,4 @@ export class MainPage extends BasePage {
     async checkButtonShowTableTop(buttonText: string) {
         await expect(this.buttonShowTableTop).toHaveText(buttonText);
     }
-    
 }
