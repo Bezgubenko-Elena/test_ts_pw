@@ -1,13 +1,23 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { MainPage } from '../pages/mainPage.js';
 
 
-test('check_hide_toptable', async ( {page} ) => {
+test.describe('Проверка переключателя Скрыть столешницу', () => {
+  test.use({
+    storageState:
+      './playwright/.auth/user.json',
+  });
 
-  const mainPage = new MainPage(page);
+  test('check_hide_toptable', async ( {page} ) => {
 
-  await mainPage.goto();
-  await mainPage.switchToggleHideTableTop();
-
-  await mainPage.checkButtonShowTableTop('Показать столешницу');
+    const mainPage = new MainPage(page);
+  
+    await mainPage.goto();
+    await mainPage.waitForUrl(mainPage.baseUrl);
+    await mainPage.isTitleVisiable('Калькулятор столешниц');
+  
+    await mainPage.switchToggleHideTableTop();
+  
+    await mainPage.checkButtonShowTableTop('Показать столешницу');
+  });
 });

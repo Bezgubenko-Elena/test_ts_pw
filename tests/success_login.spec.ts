@@ -18,5 +18,7 @@ test('success_login', async ( {page} ) => {
   await loginPage.fillPassword('LetsTest!');
   await loginPage.clickSubmit();
 
+  await loginPage.waitForUrl(loginPage.baseUrl);
+  await loginPage.isTitleVisiable('Калькулятор столешниц');
   await loginPage.checkUserName('Tester');
 });
