@@ -15,11 +15,11 @@ jobs:
       - name: Load .env file
         uses: fnkr/github-actions-set-env@v2
         with:
-        envFilePath: .env
+          envFilePath: .env
       - name: Print environment variables
         run: |
-        echo $LOGIN
-        echo $PASSWORD
+          echo $LOGIN
+          echo $PASSWORD
       - run: npx playwright test
       - name: Display logs
         run: cat playwright-report/test-results.log || true
