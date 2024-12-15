@@ -8,7 +8,7 @@ export default defineConfig({
 //  retries: 1,          // Количество повторов в случае падения теста
   workers: 2,          // Количество воркеров, которые будут использоваться для параллельных запусков
   use: {
-    headless: false, // Запуск браузера в headless режиме
+    headless: true, // Запуск браузера в headless режиме
     viewport: { width: 1280, height: 720 }, // Размер окна браузера
     ignoreHTTPSErrors: true, // Игнорирование ошибок сертификата HTTPS
     video: 'retain-on-failure', // Запись видео только если тест упал
