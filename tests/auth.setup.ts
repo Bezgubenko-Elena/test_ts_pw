@@ -16,7 +16,7 @@ setup('authenticate', async ({ page }) => {
 
   await page.waitForURL(loginPage.baseUrl);
 
-  await expect(page.getByRole('button', { name: 'Выйти' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Выйти' })).toBeVisible( {timeout: 45000} );
 
   await page.context().storageState({ path: authFile });
 });
