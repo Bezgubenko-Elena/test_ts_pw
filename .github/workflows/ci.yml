@@ -12,13 +12,9 @@ jobs:
         uses: actions/checkout@v4
       - run: npm ci
       - run: npx playwright install --with-deps
-      - name: Load environment variables
-        run: |
-          echo "Loading environment variables from .env file"
-          npm install dotenv
-          node -e "require('dotenv').config()"
-      - run: npx playwright test --list
       - run: npx playwright test
+      - name: Display logs
+        run: cat playwright-report/test-results.log || true
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
