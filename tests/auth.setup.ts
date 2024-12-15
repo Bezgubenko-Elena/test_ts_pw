@@ -7,7 +7,7 @@ const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const credentials = await loginPage.getLoginPasswordFromEnv();
+  const credentials = loginPage.getLoginPasswordFromEnv();
 
   await loginPage.goto();
   await loginPage.fillLogin(credentials.login);

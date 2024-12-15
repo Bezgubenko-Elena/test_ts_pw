@@ -7,7 +7,7 @@ test('success_login', async ( {page} ) => {
 
   const loginPage = new LoginPage(page);
   const mainPage = new MainPage(page);
-  const credentials = await loginPage.getLoginPasswordFromEnv();
+  const credentials = loginPage.getLoginPasswordFromEnv();
 
   await mainPage.ClickButtomOutput();
 
