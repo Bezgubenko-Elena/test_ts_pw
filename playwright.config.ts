@@ -9,7 +9,7 @@ export default defineConfig({
   workers: 2,          // Количество воркеров, которые будут использоваться для параллельных запусков
   use: {
     headless: true, // Запуск браузера в headless режиме
-    viewport: { width: 1280, height: 720 }, // Размер окна браузера
+    viewport: { width: 1920, height: 1080 }, // Размер окна браузера
     ignoreHTTPSErrors: true, // Игнорирование ошибок сертификата HTTPS
     video: 'retain-on-failure', // Запись видео только если тест упал
     trace: 'on-first-retry', // Трассировка, если тест упал на первой попытке
